@@ -12,6 +12,8 @@
 		E03C1F14207A753000AE9797 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E03C1F13207A753000AE9797 /* Assets.xcassets */; };
 		E03C1F22207A753000AE9797 /* ListViewAppInSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03C1F21207A753000AE9797 /* ListViewAppInSwiftTests.swift */; };
 		E03C1F2D207A753000AE9797 /* ListViewAppInSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03C1F2C207A753000AE9797 /* ListViewAppInSwiftUITests.swift */; };
+		E03C1F82208136C800AE9797 /* JSONParseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03C1F81208136C800AE9797 /* JSONParseController.swift */; };
+		E03C1F84208213CA00AE9797 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03C1F83208213CA00AE9797 /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		E03C1F28207A753000AE9797 /* ListViewAppInSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListViewAppInSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03C1F2C207A753000AE9797 /* ListViewAppInSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewAppInSwiftUITests.swift; sourceTree = "<group>"; };
 		E03C1F2E207A753000AE9797 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E03C1F81208136C800AE9797 /* JSONParseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParseController.swift; sourceTree = "<group>"; };
+		E03C1F83208213CA00AE9797 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				E03C1F0C207A753000AE9797 /* AppDelegate.swift */,
+				E03C1F83208213CA00AE9797 /* DataModel.swift */,
 				E03C1F0E207A753000AE9797 /* ViewController.swift */,
+				E03C1F81208136C800AE9797 /* JSONParseController.swift */,
 				E03C1F13207A753000AE9797 /* Assets.xcassets */,
 				E03C1F18207A753000AE9797 /* Info.plist */,
 			);
@@ -251,6 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E03C1F82208136C800AE9797 /* JSONParseController.swift in Sources */,
+				E03C1F84208213CA00AE9797 /* DataModel.swift in Sources */,
 				E03C1F0F207A753000AE9797 /* ViewController.swift in Sources */,
 				E03C1F0D207A753000AE9797 /* AppDelegate.swift in Sources */,
 			);
@@ -401,6 +409,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ListViewAppInSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.ListViewAppInSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -415,6 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ListViewAppInSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.ListViewAppInSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";

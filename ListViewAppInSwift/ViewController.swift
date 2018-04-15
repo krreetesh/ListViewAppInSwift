@@ -7,16 +7,19 @@
 //
 
 import UIKit
+let getURLString:String = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JSONParserDelegate {
     
-    private let myArray: NSArray = ["First","Second","Third"]
     private var myTableView: UITableView!
+    var rowArray: NSMutableArray? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor.cyan
+        
+        self.startLoadingData()
         
         myTableView = UITableView(frame: self.view.bounds, style: .grouped)
         
@@ -31,21 +34,55 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
 
+    //load data from server
+    func startLoadingData()
+    {
+        let jsonParserObj: JSONParseController = JSONParseController()
+        
+        jsonParserObj.parseTheJSONData(jsonURLStr: getURLString)
+        
+        jsonParserObj.delegate = self
+    }
+    
+    //Implementing the Protocol method - fetchDataWithModelArray
+    func fetchDataWithModelArray(model:NSMutableArray, titleString:String)
+    {
+        self.navigationController?.navigationBar.topItem?.title = titleString //update title of navigation bar
+        rowArray = model //update model data
+        myTableView.reloadData() //reload table view
+    }
+    
+    //tableview delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
-        print("Value: \(myArray[indexPath.row])")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myArray.count
+        if let array = self.rowArray{
+          return array.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
-        cell.textLabel!.text = "\(myArray[indexPath.row])"
-        return cell
+        let CellIdentifier:String = "Cell"
+        var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: CellIdentifier)
+        if cell == nil {
+            cell = UITableViewCell(style:UITableViewCellStyle(rawValue:3)!,reuseIdentifier:CellIdentifier)
+        }
+        // display title in cell
+        cell?.textLabel!.text = "\((rowArray![indexPath.row] as! DataModel).titleToRow)"
+        
+        //display description in cell
+        if ((rowArray![indexPath.row] as! DataModel).descriptionToRow) != nil {
+            cell?.detailTextLabel?.text = "\((rowArray![indexPath.row] as! DataModel).descriptionToRow)"
+            cell?.detailTextLabel?.numberOfLines = 0
+        }
+        else{
+            cell?.detailTextLabel?.text = ""
+        }
+        
+        return cell!
     }
-    
-
 }
 
