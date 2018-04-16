@@ -55,9 +55,32 @@ class JSONParseController : NSObject
         {
             objModel = DataModel()
             
-            objModel.titleToRow = (obj as AnyObject).value(forKey:"title") as? NSString
-            objModel.descriptionToRow = (obj as AnyObject).value(forKey:"description") as? NSString
-            objModel.imageHrefToRow = (obj as AnyObject).value(forKey:"imageHref") as? NSString
+            //objModel.titleToRow = (obj as AnyObject).value(forKey:"title") as! String
+            
+            if let titleStr = (obj as? [String: Any]){
+                if let str = titleStr["title"] {
+                    if let tstr = str as? String{
+                        objModel.titleToRow = tstr
+                    }
+                }
+            }
+            
+            if let titleStr = (obj as? [String: Any]){
+                if let str = titleStr["description"] {
+                    if let tstr = str as? String{
+                        objModel.descriptionToRow = tstr
+                    }
+                }
+            }
+            
+            if let titleStr = (obj as? [String: Any]){
+                if let str = titleStr["imageHref"] {
+                    if let tstr = str as? String{
+                        objModel.imageHrefToRow = tstr
+                    }
+                }
+            }
+            
             ar.add(objModel)
         }
         

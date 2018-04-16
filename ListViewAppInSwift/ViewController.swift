@@ -12,7 +12,7 @@ let getURLString:String = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/f
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JSONParserDelegate {
     
     private var myTableView: UITableView!
-    var rowArray: NSMutableArray? = nil
+    var rowArray : NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.reloadData() //reload table view
     }
     
+    // download the image using session download task
+    func downloadImageFromServerURL(imgURL:String?, completion:@escaping (UIImage?)->Void)
+    {
+        var task: URLSessionDownloadTask!
+        var session: URLSession!
+        session = URLSession.shared
+        task = URLSessionDownloadTask()
+        
+        var img:UIImage!
+        
+        if let url = URL(string: imgURL ?? ""){
+            task = session.downloadTask(with: url, completionHandler: { (data, response, error) -> Void in
+                if let data = try? Data(contentsOf: url){
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        img = UIImage(data: data)
+                        completion(img)
+                    })
+                }
+                completion(nil)
+            })
+        }
+        else
+        {
+            completion(nil)
+            return
+        }
+        task.resume()
+    }
+    
     //tableview delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
@@ -70,18 +99,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if cell == nil {
             cell = UITableViewCell(style:UITableViewCellStyle(rawValue:3)!,reuseIdentifier:CellIdentifier)
         }
+        
         // display title in cell
-        cell?.textLabel!.text = "\((rowArray![indexPath.row] as! DataModel).titleToRow)"
+        if let obj = rowArray[indexPath.row] as? DataModel{
+            cell?.textLabel!.text = obj.titleToRow
+        }
         
         //display description in cell
-        if ((rowArray![indexPath.row] as! DataModel).descriptionToRow) != nil {
-            cell?.detailTextLabel?.text = "\((rowArray![indexPath.row] as! DataModel).descriptionToRow)"
+        if let obj = rowArray[indexPath.row] as? DataModel{
+            cell?.detailTextLabel!.text = obj.descriptionToRow
             cell?.detailTextLabel?.numberOfLines = 0
         }
-        else{
-            cell?.detailTextLabel?.text = ""
-        }
         
+        //display image in imageview of cell
+        if let obj = rowArray[indexPath.row] as? DataModel{
+            downloadImageFromServerURL(imgURL: obj.imageHrefToRow, completion: { (img) in
+                if let imgObj = img {
+                    DispatchQueue.main.async {
+                        cell?.imageView?.image = imgObj
+                    }
+                }
+            })
+        }
         return cell!
     }
 }

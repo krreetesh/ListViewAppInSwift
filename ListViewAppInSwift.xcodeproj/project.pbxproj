@@ -47,6 +47,7 @@
 		E03C1F2E207A753000AE9797 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E03C1F81208136C800AE9797 /* JSONParseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParseController.swift; sourceTree = "<group>"; };
 		E03C1F83208213CA00AE9797 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E03C1F8520835FDD00AE9797 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 				E03C1F81208136C800AE9797 /* JSONParseController.swift */,
 				E03C1F13207A753000AE9797 /* Assets.xcassets */,
 				E03C1F18207A753000AE9797 /* Info.plist */,
+				E03C1F8520835FDD00AE9797 /* placeholder.png */,
 			);
 			path = ListViewAppInSwift;
 			sourceTree = "<group>";
