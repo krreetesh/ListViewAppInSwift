@@ -14,6 +14,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var myTableView: UITableView!
     var rowArray : NSMutableArray!
     
+    // defining UIRefresh Control
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(ViewController.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,17 +32,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.startLoadingData()
         
+        //table view
         myTableView = UITableView(frame: self.view.bounds, style: .grouped)
-        
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         myTableView.dataSource = self
         myTableView.delegate = self
         self.view.addSubview(myTableView)
+        
+        //calling pull to refresh
+        myTableView.addSubview(self.refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //handle pull to refresh control
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.red]
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing please wait", attributes: attributes)
+        self.startLoadingData()
+        myTableView.reloadData()
+        refreshControl.endRefreshing()
     }
 
     //load data from server
