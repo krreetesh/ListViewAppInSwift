@@ -9,6 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ListViewAppInSwiftTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>E03C1F08207A753000AE9797</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E03C1F1C207A753000AE9797</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E03C1F27207A753000AE9797</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
