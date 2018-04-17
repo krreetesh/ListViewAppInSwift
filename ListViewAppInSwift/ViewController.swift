@@ -100,6 +100,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = UITableViewCell(style:UITableViewCellStyle(rawValue:3)!,reuseIdentifier:CellIdentifier)
         }
         
+        // adjust image size in context of image view cell
+        let itemSize = CGSize(width: 40, height: 40);
+        UIGraphicsBeginImageContextWithOptions(itemSize, false, UIScreen.main.scale);
+        let imageRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height);
+        cell?.imageView?.image?.draw(in: imageRect)
+        cell?.imageView?.image? = UIGraphicsGetImageFromCurrentImageContext()!;
+        UIGraphicsEndImageContext();
+        
         // display title in cell
         if let obj = rowArray[indexPath.row] as? DataModel{
             cell?.textLabel!.text = obj.titleToRow
