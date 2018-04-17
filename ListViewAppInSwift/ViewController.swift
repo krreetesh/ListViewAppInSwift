@@ -11,7 +11,7 @@ let getURLString:String = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/f
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JSONParserDelegate {
     
-    private var myTableView: UITableView!
+    var myTableView: UITableView!
     var rowArray : NSMutableArray!
     
     override func viewDidLoad() {
